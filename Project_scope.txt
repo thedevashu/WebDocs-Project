@@ -1,0 +1,30 @@
+                        Project Scope                                            
+     
+	 
+  WebDocs is a Web Application which provides several services to the patients. 
+The main purpose behind this application is to help patients to book , cancel,
+reschedule doctor’s appointment.   
+     1.Login/Registration 
+     2.Appointment Management
+     3.Presciption Management
+     4.Feedback/Rating Management
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
