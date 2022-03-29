@@ -1,0 +1,1 @@
+INSERT INTO Category VALUES(2,"Anesthesiologists","An anesthesiologist is a highly skilled medical doctor who specializes in pain relief and cares for patients before, during, and after surgery.");
