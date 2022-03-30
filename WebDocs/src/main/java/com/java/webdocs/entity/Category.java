@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Category implements Serializable {
 	private String specialization;
 
 	//bi-directional many-to-one association to Doctor
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category",cascade = CascadeType.ALL)
 	private List<Doctor> doctors;
 
 	public Category() {

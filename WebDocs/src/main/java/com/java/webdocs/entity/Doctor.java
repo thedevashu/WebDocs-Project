@@ -54,7 +54,7 @@ public class Doctor implements Serializable {
 	private String doctor_Username;
 
 	//bi-directional many-to-one association to Appointment
-	@OneToMany(mappedBy="doctor")
+	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 
 	//bi-directional many-to-one association to Category
@@ -68,11 +68,11 @@ public class Doctor implements Serializable {
 	private Hospital hospital;
 
 	//bi-directional many-to-one association to Feedback
-	@OneToMany(mappedBy="doctor")
+	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL)
 	private List<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Slot
-	@OneToMany(mappedBy="doctor")
+	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL)
 	private List<Slot> slots;
 
 	public Doctor() {
@@ -287,8 +287,7 @@ public class Doctor implements Serializable {
 				+ doctor_Gender + ", doctor_License_Number=" + doctor_License_Number + ", doctor_Mobile_number="
 				+ doctor_Mobile_number + ", doctor_Name=" + doctor_Name + ", doctor_Password=" + doctor_Password
 				+ ", doctor_Photo=" + Arrays.toString(doctor_Photo) + ", doctor_Username=" + doctor_Username
-				+ ", appointments=" + appointments + ", category=" + category + ", hospital=" + hospital
-				+ ", feedbacks=" + feedbacks + ", slots=" + slots + "]";
+				+"]";
 	}
 
 }

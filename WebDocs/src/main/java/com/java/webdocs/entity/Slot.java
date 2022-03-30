@@ -19,6 +19,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @NamedQuery(name="Slot.findAll", query="SELECT s FROM Slot s")
 public class Slot implements Serializable {
@@ -30,14 +34,16 @@ public class Slot implements Serializable {
 	private int slotId;
 
 	@Temporal(TemporalType.DATE)
+	
 	private Date slot_Date;
 
+	
 	private Time slot_End_Time;
 
 	private Time slot_Start_Time;
 
 	//bi-directional many-to-one association to Appointment
-	@OneToMany(mappedBy="slot")
+	@OneToMany(mappedBy="slot",cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 
 	//bi-directional many-to-one association to Doctor

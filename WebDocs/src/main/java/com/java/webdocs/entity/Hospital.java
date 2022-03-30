@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,17 +26,17 @@ public class Hospital implements Serializable {
 
 	private String hospital_Address;
 
-	@Lob
-	private byte[] hospital_Image;
+//	@Lob
+//	private byte[] hospital_Image;
 
 	private String hospital_Name;
 
 	//bi-directional many-to-one association to Doctor
-	@OneToMany(mappedBy="hospital")
+	@OneToMany(mappedBy="hospital",cascade = CascadeType.ALL)
 	private List<Doctor> doctors;
 
 	//bi-directional many-to-one association to Slot
-	@OneToMany(mappedBy="hospital")
+	@OneToMany(mappedBy="hospital",cascade = CascadeType.ALL)
 	private List<Slot> slots;
 
 	public Hospital() {
@@ -46,7 +47,7 @@ public class Hospital implements Serializable {
 		super();
 		this.hospital_id = hospital_id;
 		this.hospital_Address = hospital_Address;
-		this.hospital_Image = hospital_Image;
+//		this.hospital_Image = hospital_Image;
 		this.hospital_Name = hospital_Name;
 		this.doctors = doctors;
 		this.slots = slots;
@@ -68,13 +69,13 @@ public class Hospital implements Serializable {
 		this.hospital_Address = hospital_Address;
 	}
 
-	public byte[] getHospital_Image() {
-		return this.hospital_Image;
-	}
-
-	public void setHospital_Image(byte[] hospital_Image) {
-		this.hospital_Image = hospital_Image;
-	}
+//	public byte[] getHospital_Image() {
+//		return this.hospital_Image;
+//	}
+//
+//	public void setHospital_Image(byte[] hospital_Image) {
+//		this.hospital_Image = hospital_Image;
+//	}
 
 	public String getHospital_Name() {
 		return this.hospital_Name;
@@ -131,7 +132,7 @@ public class Hospital implements Serializable {
 	@Override
 	public String toString() {
 		return "Hospital [hospital_id=" + hospital_id + ", hospital_Address=" + hospital_Address + ", hospital_Image="
-				+ Arrays.toString(hospital_Image) + ", hospital_Name=" + hospital_Name + ", doctors=" + doctors
+				+ ", hospital_Name=" + hospital_Name + ", doctors=" + doctors
 				+ ", slots=" + slots + "]";
 	}
 

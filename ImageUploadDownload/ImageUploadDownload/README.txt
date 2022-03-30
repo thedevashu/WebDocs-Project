@@ -1,0 +1,1 @@
+Edit the application.properties from src/main/resources according to your datasource

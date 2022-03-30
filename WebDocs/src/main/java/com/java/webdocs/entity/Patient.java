@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,17 +40,17 @@ public class Patient implements Serializable {
 
 	private String patient_Password;
 
-	@Lob
-	private byte[] patient_Photo;
+//	@Lob
+//	private byte[] patient_Photo;
 
 	private String patient_Username;
 
 	//bi-directional many-to-one association to Appointment
-	@OneToMany(mappedBy="patient")
+	@OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 
 	//bi-directional many-to-one association to Feedback
-	@OneToMany(mappedBy="patient")
+	@OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
 	private List<Feedback> feedbacks;
 
 	public Patient() {
@@ -66,7 +67,7 @@ public class Patient implements Serializable {
 		this.patient_Mobile_number = patient_Mobile_number;
 		this.patient_Name = patient_Name;
 		this.patient_Password = patient_Password;
-		this.patient_Photo = patient_Photo;
+//		this.patient_Photo = patient_Photo;
 		this.patient_Username = patient_Username;
 		this.appointments = appointments;
 		this.feedbacks = feedbacks;
@@ -128,13 +129,13 @@ public class Patient implements Serializable {
 		this.patient_Password = patient_Password;
 	}
 
-	public byte[] getPatient_Photo() {
-		return this.patient_Photo;
-	}
-
-	public void setPatient_Photo(byte[] patient_Photo) {
-		this.patient_Photo = patient_Photo;
-	}
+//	public byte[] getPatient_Photo() {
+//		return this.patient_Photo;
+//	}
+//
+//	public void setPatient_Photo(byte[] patient_Photo) {
+//		this.patient_Photo = patient_Photo;
+//	}
 
 	public String getPatient_Username() {
 		return this.patient_Username;
@@ -193,8 +194,7 @@ public class Patient implements Serializable {
 		return "Patient [patient_Id=" + patient_Id + ", patient_DOB=" + patient_DOB + ", patient_Email=" + patient_Email
 				+ ", patient_Gender=" + patient_Gender + ", patient_Mobile_number=" + patient_Mobile_number
 				+ ", patient_Name=" + patient_Name + ", patient_Password=" + patient_Password + ", patient_Photo="
-				+ Arrays.toString(patient_Photo) + ", patient_Username=" + patient_Username + ", appointments="
-				+ appointments + ", feedbacks=" + feedbacks + "]";
+				 + ", patient_Username=" + patient_Username +  "]";
 	}
 
 }
