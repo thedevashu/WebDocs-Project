@@ -15,8 +15,12 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @NamedQuery(name="Hospital.findAll", query="SELECT h FROM Hospital h")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "hospital_id")
 public class Hospital implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,32 +30,20 @@ public class Hospital implements Serializable {
 
 	private String hospital_Address;
 
-//	@Lob
-//	private byte[] hospital_Image;
-
 	private String hospital_Name;
 
 	//bi-directional many-to-one association to Doctor
-	@OneToMany(mappedBy="hospital",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="hospital",cascade= CascadeType.ALL)
 	private List<Doctor> doctors;
 
 	//bi-directional many-to-one association to Slot
-	@OneToMany(mappedBy="hospital",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="hospital",cascade= CascadeType.ALL)
 	private List<Slot> slots;
 
 	public Hospital() {
 	}
 
-	public Hospital(int hospital_id, String hospital_Address, byte[] hospital_Image, String hospital_Name,
-			List<Doctor> doctors, List<Slot> slots) {
-		super();
-		this.hospital_id = hospital_id;
-		this.hospital_Address = hospital_Address;
-//		this.hospital_Image = hospital_Image;
-		this.hospital_Name = hospital_Name;
-		this.doctors = doctors;
-		this.slots = slots;
-	}
+	
 
 	public int getHospital_id() {
 		return this.hospital_id;
@@ -69,13 +61,7 @@ public class Hospital implements Serializable {
 		this.hospital_Address = hospital_Address;
 	}
 
-//	public byte[] getHospital_Image() {
-//		return this.hospital_Image;
-//	}
-//
-//	public void setHospital_Image(byte[] hospital_Image) {
-//		this.hospital_Image = hospital_Image;
-//	}
+	
 
 	public String getHospital_Name() {
 		return this.hospital_Name;
@@ -131,9 +117,8 @@ public class Hospital implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Hospital [hospital_id=" + hospital_id + ", hospital_Address=" + hospital_Address + ", hospital_Image="
-				+ ", hospital_Name=" + hospital_Name + ", doctors=" + doctors
-				+ ", slots=" + slots + "]";
+		return "Hospital [hospital_id=" + hospital_id + ", hospital_Address=" + hospital_Address 
+				 + "]";
 	}
 
 }

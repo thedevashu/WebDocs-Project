@@ -19,6 +19,7 @@ import com.java.webdocs.entity.Doctor;
 import com.java.webdocs.entity.Feedback;
 import com.java.webdocs.entity.Patient;
 import com.java.webdocs.entity.Slot;
+import com.java.webdocs.repository.AppoinmentRepositry;
 import com.java.webdocs.repository.DoctorRepository;
 import com.java.webdocs.repository.FeedbackRepositry;
 import com.java.webdocs.repository.PatientRepository;
@@ -35,6 +36,8 @@ public class PatientController {
 	private DoctorRepository dr;
 	@Autowired
 	private SlotRepository sr;
+	@Autowired
+	private AppoinmentRepositry ar;
 	
 	@GetMapping("/getAll")
 	public List<Patient> getAllPatient(){
@@ -65,22 +68,15 @@ public class PatientController {
 	public void bookAppoinment(@PathVariable int pid,@PathVariable int did,@RequestBody Slot s) {
 		Doctor d = dr.getById(did);
 		Patient p = pr.getById(pid);
-		List<Appointment> al = s.getAppointments();
-		if(al == null) {
-			al = new ArrayList<>();
-		}
 		Appointment a = new Appointment();
-		a.setAppointment_Status((byte)1);
 		a.setDoctor(d);
 		a.setPatient(p);
-		a.setSlot(s);
-		
-		al.add(a);
-		s.setAppointments(al);
-		
-		s.setHospital(null);
+		s.setHospital(d.getHospital() != null ? d.getHospital():null);
+		s.addAppointment(a);
 		s.setDoctor(d);
+		
 		sr.save(s);
+		
 		
 	}
 	
@@ -89,14 +85,12 @@ public class PatientController {
 		System.out.println("pid="+pid +" did="+did);
 		boolean status = false;
 		Patient p= pr.getById(pid);
-		fb.setDoctor(dr.getById(did));
 		fb.setPatient(p);
-		List<Feedback> fl = p.getFeedbacks();
-		fl.add(fb);
-		p.setFeedbacks(fl);
-		System.out.println(p);
-		//fr.save(fb);
-		pr.save(p);
+		Doctor d= dr.getById(did);
+		fb.setDoctor(d);
+		d.addFeedback(fb);
+		dr.save(d);
+		status = true;
 		return status;
 	}
 

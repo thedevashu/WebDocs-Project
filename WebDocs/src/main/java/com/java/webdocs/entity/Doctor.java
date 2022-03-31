@@ -20,8 +20,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @NamedQuery(name="Doctor.findAll", query="SELECT d FROM Doctor d")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "doctor_Id")
 public class Doctor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -54,7 +58,7 @@ public class Doctor implements Serializable {
 	private String doctor_Username;
 
 	//bi-directional many-to-one association to Appointment
-	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="doctor",cascade= CascadeType.ALL)
 	private List<Appointment> appointments;
 
 	//bi-directional many-to-one association to Category
@@ -68,11 +72,11 @@ public class Doctor implements Serializable {
 	private Hospital hospital;
 
 	//bi-directional many-to-one association to Feedback
-	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="doctor",cascade= CascadeType.ALL)
 	private List<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Slot
-	@OneToMany(mappedBy="doctor",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="doctor",cascade= CascadeType.ALL)
 	private List<Slot> slots;
 
 	public Doctor() {
@@ -287,7 +291,7 @@ public class Doctor implements Serializable {
 				+ doctor_Gender + ", doctor_License_Number=" + doctor_License_Number + ", doctor_Mobile_number="
 				+ doctor_Mobile_number + ", doctor_Name=" + doctor_Name + ", doctor_Password=" + doctor_Password
 				+ ", doctor_Photo=" + Arrays.toString(doctor_Photo) + ", doctor_Username=" + doctor_Username
-				+"]";
+				+ "]";
 	}
 
 }

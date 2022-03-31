@@ -1,8 +1,10 @@
 package com.java.webdocs.entity;
 import java.io.Serializable;
 import java.sql.Blob;
-import java.util.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Date;
+
 import java.util.List;
 import java.util.Set;
 
@@ -19,31 +21,31 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @NamedQuery(name="Slot.findAll", query="SELECT s FROM Slot s")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "slot_id")
 public class Slot implements Serializable {
+	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="slot_id")
-	private int slotId;
+	
+	private int slot_id;
 
 	@Temporal(TemporalType.DATE)
-	
 	private Date slot_Date;
 
-	
 	private Time slot_End_Time;
 
 	private Time slot_Start_Time;
 
 	//bi-directional many-to-one association to Appointment
-	@OneToMany(mappedBy="slot",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="slot",cascade= CascadeType.ALL)
 	private List<Appointment> appointments;
 
 	//bi-directional many-to-one association to Doctor
@@ -57,12 +59,13 @@ public class Slot implements Serializable {
 	private Hospital hospital;
 
 	public Slot() {
+		appointments = new ArrayList<Appointment>();
 	}
 
 	public Slot(int slotId, Date slot_Date, Time slot_End_Time, Time slot_Start_Time, List<Appointment> appointments,
 			Doctor doctor, Hospital hospital) {
 		super();
-		this.slotId = slotId;
+		
 		this.slot_Date = slot_Date;
 		this.slot_End_Time = slot_End_Time;
 		this.slot_Start_Time = slot_Start_Time;
@@ -71,14 +74,7 @@ public class Slot implements Serializable {
 		this.hospital = hospital;
 	}
 
-	public int getSlotId() {
-		return this.slotId;
-	}
-
-	public void setSlotId(int slotId) {
-		this.slotId = slotId;
-	}
-
+	
 	public Date getSlot_Date() {
 		return this.slot_Date;
 	}
@@ -101,6 +97,13 @@ public class Slot implements Serializable {
 
 	public void setSlot_Start_Time(Time slot_Start_Time) {
 		this.slot_Start_Time = slot_Start_Time;
+	}
+	public int getSlot_id() {
+		return slot_id;
+	}
+
+	public void setSlot_id(int slot_id) {
+		this.slot_id = slot_id;
 	}
 
 	public List<Appointment> getAppointments() {
@@ -143,9 +146,8 @@ public class Slot implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Slot [slotId=" + slotId + ", slot_Date=" + slot_Date + ", slot_End_Time=" + slot_End_Time
-				+ ", slot_Start_Time=" + slot_Start_Time + ", appointments=" + appointments + ", doctor=" + doctor
-				+ ", hospital=" + hospital + "]";
+		return "Slot [slotId=" + slot_id + ", slot_Date=" + slot_Date + ", slot_End_Time=" + slot_End_Time
+				+ ", slot_Start_Time=" + slot_Start_Time +  "]";
 	}
 
 }

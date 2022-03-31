@@ -15,8 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @NamedQuery(name="Feedback.findAll", query="SELECT f FROM Feedback f")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "feedback_Id")
 public class Feedback implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -93,7 +97,7 @@ public class Feedback implements Serializable {
 	@Override
 	public String toString() {
 		return "Feedback [feedback_Id=" + feedback_Id + ", feedback_Rating=" + feedback_Rating + ", feedback_Text="
-				+ feedback_Text + ", doctor=" + doctor + ", patient=" + patient + "]";
+				+ feedback_Text + "]";
 	}
 
 }

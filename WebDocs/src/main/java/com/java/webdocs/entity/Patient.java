@@ -18,8 +18,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @NamedQuery(name="Patient.findAll", query="SELECT p FROM Patient p")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "patient_Id")
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -40,38 +44,21 @@ public class Patient implements Serializable {
 
 	private String patient_Password;
 
-//	@Lob
-//	private byte[] patient_Photo;
 
 	private String patient_Username;
 
 	//bi-directional many-to-one association to Appointment
-	@OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="patient",cascade= CascadeType.ALL)
 	private List<Appointment> appointments;
 
 	//bi-directional many-to-one association to Feedback
-	@OneToMany(mappedBy="patient",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="patient",cascade= CascadeType.ALL)
 	private List<Feedback> feedbacks;
 
 	public Patient() {
 	}
 	
-	public Patient(int patient_Id, Date patient_DOB, String patient_Email, String patient_Gender,
-			String patient_Mobile_number, String patient_Name, String patient_Password, byte[] patient_Photo,
-			String patient_Username, List<Appointment> appointments, List<Feedback> feedbacks) {
-		super();
-		this.patient_Id = patient_Id;
-		this.patient_DOB = patient_DOB;
-		this.patient_Email = patient_Email;
-		this.patient_Gender = patient_Gender;
-		this.patient_Mobile_number = patient_Mobile_number;
-		this.patient_Name = patient_Name;
-		this.patient_Password = patient_Password;
-//		this.patient_Photo = patient_Photo;
-		this.patient_Username = patient_Username;
-		this.appointments = appointments;
-		this.feedbacks = feedbacks;
-	}
+	
 
 	public int getPatient_Id() {
 		return this.patient_Id;
@@ -129,13 +116,6 @@ public class Patient implements Serializable {
 		this.patient_Password = patient_Password;
 	}
 
-//	public byte[] getPatient_Photo() {
-//		return this.patient_Photo;
-//	}
-//
-//	public void setPatient_Photo(byte[] patient_Photo) {
-//		this.patient_Photo = patient_Photo;
-//	}
 
 	public String getPatient_Username() {
 		return this.patient_Username;

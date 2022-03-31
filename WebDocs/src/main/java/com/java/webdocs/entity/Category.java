@@ -13,8 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "category_id")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,7 +31,7 @@ public class Category implements Serializable {
 	private String specialization;
 
 	//bi-directional many-to-one association to Doctor
-	@OneToMany(mappedBy="category",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="category",cascade= CascadeType.ALL)
 	private List<Doctor> doctors;
 
 	public Category() {
@@ -89,8 +93,7 @@ public class Category implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Category [category_id=" + category_id + ", description=" + description + ", specialization="
-				+ specialization + ", doctors=" + doctors + "]";
+		return "Category [category_id=" + category_id + ", description=" + description +  "]";
 	}
 
 }

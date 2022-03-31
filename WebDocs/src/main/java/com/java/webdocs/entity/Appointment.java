@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @NamedQuery(name="Appointment.findAll", query="SELECT a FROM Appointment a")
 public class Appointment implements Serializable {
@@ -23,6 +26,7 @@ public class Appointment implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "appointment_id")
 	private int appointment_id;
 
 	private byte appointment_Status;
@@ -97,7 +101,7 @@ public class Appointment implements Serializable {
 	@Override
 	public String toString() {
 		return "Appointment [appointment_id=" + appointment_id + ", appointment_Status=" + appointment_Status
-				+ ", doctor=" + doctor + ", patient=" + patient + ", slot=" + slot + "]";
+				+ "]";
 	}
 
 }
