@@ -2,6 +2,7 @@ package com.java.webdocs.entity;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +42,8 @@ public class Hospital implements Serializable {
 	private List<Slot> slots;
 
 	public Hospital() {
+		slots = new ArrayList<Slot>();
+		doctors = new ArrayList<>();
 	}
 
 	

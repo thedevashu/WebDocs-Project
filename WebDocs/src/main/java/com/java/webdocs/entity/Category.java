@@ -2,6 +2,7 @@ package com.java.webdocs.entity;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,8 @@ public class Category implements Serializable {
 	private List<Doctor> doctors;
 
 	public Category() {
+		doctors = new ArrayList<>();
+		
 	}
 
 	public Category(int category_id, String description, String specialization, List<Doctor> doctors) {

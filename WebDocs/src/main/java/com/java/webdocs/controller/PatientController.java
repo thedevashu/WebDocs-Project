@@ -30,8 +30,7 @@ import com.java.webdocs.repository.SlotRepository;
 public class PatientController {
 	@Autowired
 	private PatientRepository pr;
-	@Autowired
-	private FeedbackRepositry fr;
+	
 	@Autowired
 	private DoctorRepository dr;
 	@Autowired
@@ -78,6 +77,11 @@ public class PatientController {
 		sr.save(s);
 		
 		
+	}
+	@GetMapping("/getAppointment/{pid}")
+	public List<Appointment> getPatientAppointment(@PathVariable int pid) {
+		Patient p = pr.getById(pid);
+		return p.getAppointments();
 	}
 	
 	@PostMapping("/addFeedback/{pid}/{did}")

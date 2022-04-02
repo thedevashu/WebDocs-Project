@@ -3,6 +3,7 @@ package com.java.webdocs.entity;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,6 +57,8 @@ public class Patient implements Serializable {
 	private List<Feedback> feedbacks;
 
 	public Patient() {
+		appointments = new ArrayList<>();
+		feedbacks = new ArrayList<>();
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.java.webdocs.entity;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,6 +81,10 @@ public class Doctor implements Serializable {
 	private List<Slot> slots;
 
 	public Doctor() {
+		slots = new ArrayList<Slot>();
+		feedbacks = new ArrayList<>();
+		appointments = new ArrayList<>();
+		
 	}
 
 	public Doctor(int doctor_Id, Date doctor_DOB, String doctor_Email, int doctor_Experience, int doctor_Fees,

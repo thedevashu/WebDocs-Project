@@ -30,6 +30,8 @@ public class DoctorController {
 	private DoctorRepository dr;
 	@Autowired
 	private HospitalRepository hr;
+	@Autowired
+	private CategoryRepositry cr;
 	
 	@GetMapping("/getAll")
 	public List<Doctor> getAllDoctors(){
@@ -37,10 +39,25 @@ public class DoctorController {
 	}
 	//add doctor with hospital
 	
-	@GetMapping("/add/{hospital_id}")
+	@PostMapping("/add/{hospital_id}/")
 	public void addDoc(@RequestBody Doctor d,@PathVariable int hospital_id)
 	{
 		Hospital h = hr.getById(hospital_id);
+		d.setHospital(h);
+		
+		dr.save(d);
+			
+		
+		
+		
+	}
+	//save doctor with hospital and category
+	
+	@PostMapping("/add/{hospital_id}/{category_id}")
+	public void addDoc(@RequestBody Doctor d,@PathVariable int hospital_id,@PathVariable int category_id)
+	{
+		Hospital h = hr.getById(hospital_id);
+		Category c = cr.getById(category_id);
 		d.setHospital(h);
 		
 		dr.save(d);
