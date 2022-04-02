@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,18 +26,22 @@ import com.java.webdocs.repository.FeedbackRepositry;
 import com.java.webdocs.repository.PatientRepository;
 import com.java.webdocs.repository.SlotRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
 	@Autowired
 	private PatientRepository pr;
-	
+	@Autowired
+	private FeedbackRepositry fr;
 	@Autowired
 	private DoctorRepository dr;
 	@Autowired
 	private SlotRepository sr;
 	@Autowired
 	private AppoinmentRepositry ar;
+	@Autowired
+	private LoginDAO dao;
 	
 	@GetMapping("/getAll")
 	public List<Patient> getAllPatient(){
@@ -96,6 +101,14 @@ public class PatientController {
 		dr.save(d);
 		status = true;
 		return status;
+	}
+	
+	@GetMapping("/login/{patient_Username}/{patient_Password}")
+	public Patient LoginValidation(@PathVariable("patient_Username") String patient_Username,@PathVariable("patient_Password") String patient_Password)
+	{
+		System.out.println(patient_Username+" "+patient_Password);
+		return dao.LoginValide(patient_Username, patient_Password);
+		
 	}
 
 }

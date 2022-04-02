@@ -56,7 +56,9 @@ public class Doctor implements Serializable {
 	@Lob
 	private byte[] doctor_Photo;
 
-	private String doctor_Username;
+	@Column(name="doctor_Username")
+	private String username;
+	//private String doctor_Username;
 
 	//bi-directional many-to-one association to Appointment
 	@OneToMany(mappedBy="doctor",cascade= CascadeType.ALL)
@@ -103,7 +105,7 @@ public class Doctor implements Serializable {
 		this.doctor_Name = doctor_Name;
 		this.doctor_Password = doctor_Password;
 		this.doctor_Photo = doctor_Photo;
-		this.doctor_Username = doctor_Username;
+		this.username = doctor_Username;
 		this.appointments = appointments;
 		this.category = category;
 		this.hospital = hospital;
@@ -200,11 +202,11 @@ public class Doctor implements Serializable {
 	}
 
 	public String getDoctor_Username() {
-		return this.doctor_Username;
+		return this.username;
 	}
 
 	public void setDoctor_Username(String doctor_Username) {
-		this.doctor_Username = doctor_Username;
+		this.username = doctor_Username;
 	}
 
 	public List<Appointment> getAppointments() {
@@ -295,7 +297,7 @@ public class Doctor implements Serializable {
 				+ ", doctor_Experience=" + doctor_Experience + ", doctor_Fees=" + doctor_Fees + ", doctor_Gender="
 				+ doctor_Gender + ", doctor_License_Number=" + doctor_License_Number + ", doctor_Mobile_number="
 				+ doctor_Mobile_number + ", doctor_Name=" + doctor_Name + ", doctor_Password=" + doctor_Password
-				+ ", doctor_Photo=" + Arrays.toString(doctor_Photo) + ", doctor_Username=" + doctor_Username
+				+ ", doctor_Photo=" + Arrays.toString(doctor_Photo) + ", doctor_Username=" + username
 				+ "]";
 	}
 

@@ -45,8 +45,9 @@ public class Patient implements Serializable {
 
 	private String patient_Password;
 
-
-	private String patient_Username;
+	@Column(name="patient_Username")
+	private String username;
+	//private String patient_Username;
 
 	//bi-directional many-to-one association to Appointment
 	@OneToMany(mappedBy="patient",cascade= CascadeType.ALL)
@@ -121,11 +122,11 @@ public class Patient implements Serializable {
 
 
 	public String getPatient_Username() {
-		return this.patient_Username;
+		return this.username;
 	}
 
 	public void setPatient_Username(String patient_Username) {
-		this.patient_Username = patient_Username;
+		this.username = patient_Username;
 	}
 
 	public List<Appointment> getAppointments() {
@@ -177,7 +178,7 @@ public class Patient implements Serializable {
 		return "Patient [patient_Id=" + patient_Id + ", patient_DOB=" + patient_DOB + ", patient_Email=" + patient_Email
 				+ ", patient_Gender=" + patient_Gender + ", patient_Mobile_number=" + patient_Mobile_number
 				+ ", patient_Name=" + patient_Name + ", patient_Password=" + patient_Password + ", patient_Photo="
-				 + ", patient_Username=" + patient_Username +  "]";
+				 + ", patient_Username=" + username +  "]";
 	}
 
 }
