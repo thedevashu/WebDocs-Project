@@ -44,6 +44,9 @@ export default function Login() {
 
 
 
+
+
+
 	}
 
 
@@ -86,9 +89,9 @@ export default function Login() {
 										<div className="text-right">
 											<a className="forgot-link" href="forgot-password.html">Forgot Password ?</a>
 										</div>
-										<Link className="btn btn-primary btn-block btn-lg login-btn" to="/patienthome" onClick={
+										<button className="btn btn-primary btn-block btn-lg login-btn" to="/patienthome" onClick={
 											verify()
-										}>Login</Link>
+										}>Login</button>
 
 
 										<div className="text-center dont-have">Don’t have an account? <a >Register</a></div>
